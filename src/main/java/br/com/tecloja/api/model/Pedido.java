@@ -17,17 +17,19 @@ public class Pedido {
     private LocalDateTime dataPedido = LocalDateTime.now();
 
     @Column(nullable = false)
-    private String status;
+    private String status; // PENDENTE, PAGO, CANCELADO
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
+    // Relacionamento 1:N forte. A exclusão de um Pedido remove em cascata seus itens.
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itens = new ArrayList<>();
 
     public Pedido() {}
 
+    // Auxiliar para garantir integridade bidirecional
     public void adicionarItem(ItemPedido item) {
         itens.add(item);
         item.setPedido(this);

@@ -18,6 +18,7 @@ public class Usuario {
     @Column(nullable = false)
     private String senha;
 
+    // EAGER fetch é aceitável aqui pois papéis são leves e sempre necessários com o usuário
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "usuario_papel",

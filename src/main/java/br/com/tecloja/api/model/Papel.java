@@ -11,7 +11,7 @@ public class Papel {
     private Long id;
 
     @Column(nullable = false, unique = true, length = 50)
-    private String nome;
+    private String nome; // Ex: ROLE_USER ou ROLE_ADMIN
 
     public Papel() {}
     public Papel(Long id, String nome) {
